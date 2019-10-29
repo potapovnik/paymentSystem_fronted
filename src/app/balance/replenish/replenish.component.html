@@ -1,0 +1,17 @@
+<div class="replenishFromBalance">
+  <mat-card class="containerForReplenish">
+    <div class="text"> Пополнить с карты</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="CardForReplenish" placeholder="Введите номер карты">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="moneyForTransfer" placeholder="Введите количество денег">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="messageForTransfer" placeholder="Введите сообщение перевода">
+    </mat-form-field>
+    <button mat-raised-button class="replenishButton" (click)="transferFromCard()"> пополнить</button>
+  </mat-card>
+  <button mat-raised-button class="goBack" (click)="goBack()"> назад</button>
+
+</div>

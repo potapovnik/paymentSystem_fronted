@@ -1,0 +1,32 @@
+.mainComponent{
+  display: flex;
+  flex-direction: row;
+}
+
+.selectedUserComponent{
+  margin-left: 40px;
+  margin-top: 3%;
+}
+.createUserComponent{
+  margin-left: 40px;
+  margin-top: 3%;
+}
+.buttonInList{
+  margin-bottom: 10px;
+}
+.selectedUser{
+  display: flex;
+  flex-direction: column;
+}
+.createUser{
+  display: flex;
+  flex-direction: column;
+}
+.textInList{
+  white-space: pre-line;
+}
+.createButton{
+  width: 80%;
+  margin-top: 10px;
+  margin-left: 10%;
+}

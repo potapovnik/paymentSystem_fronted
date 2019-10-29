@@ -1,0 +1,11 @@
+<mat-card class="window">
+  <div class="dataOfBalance">
+    <div>Номер счёта: {{balanceOfUser.numberOfBalance}}</div>
+    <div>Доступный баланс: {{balanceOfUser.money}}</div>
+    <div>Заблокирован: {{balanceOfUser.isLock}}</div>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button class="replenishButton" (click)="replenishBalance()"> Пополнить</button>
+    <button mat-raised-button class="withdrawButton" (click)="withdraw()"> Снять</button>
+  </div>
+</mat-card>

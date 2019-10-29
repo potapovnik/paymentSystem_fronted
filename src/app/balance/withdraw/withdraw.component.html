@@ -1,0 +1,29 @@
+<div class="windowOfWithdraw">
+  <div class="withdrawToBalance">
+    <div class="text">Перевести на баланс</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="balanceToWithdraw" placeholder="Введите номер баланса">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="moneyForBalance" placeholder="Введите количество денег">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="messageWithdrawToBalance" placeholder="Введите сообщение перевода">
+    </mat-form-field>
+    <button mat-raised-button (click)="transferOnBalance()"> Перевести</button>
+  </div>
+  <div class="withdrawToCard">
+    <div class="text">Перевести на карту</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="cardToWithdraw" placeholder="Введите номер карты">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="moneyForCard" placeholder="Введите количество денег">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="messageWithdrawToCard" placeholder="Введите сообщение перевода">
+    </mat-form-field>
+    <button mat-raised-button (click)="transferOnCard()"> Перевести</button>
+  </div>
+  <button  mat-raised-button (click)="goBack()"> назад</button>
+</div>
