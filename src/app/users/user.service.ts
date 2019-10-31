@@ -9,6 +9,7 @@ import {TransferDto} from '../entity/transferDto';
 })
 export class UserService {
   private users = '/paymentSystem/user';
+  private transfer = '/paymentSystem/transfer';
   private head = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) {
@@ -26,6 +27,12 @@ export class UserService {
     return this.http.post<User>(url, user, {headers: this.head});
   }
 
+  registerNewUser(user: User): Observable<User> {
+    const url = this.users + '/registerNewUser';
+    console.log(url + '- post user ');
+    return this.http.post<User>(url, user, {headers: this.head});
+  }
+
   updateUser(user: User): Observable<User> {
     const url = this.users;
     console.log(url + '- update user ');
@@ -39,7 +46,7 @@ export class UserService {
   }
 
   getJournalOfUser(id: number): Observable<TransferDto[]> {
-    const url = this.users + '/journalOfUser' + '?id=' + id;
+    const url = this.transfer + '/journalOfUser' + '?id=' + id;
     console.log(url + '-get journal of user ');
     return this.http.get<TransferDto[]>(url, {headers: this.head});
   }

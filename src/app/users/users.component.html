@@ -1,7 +1,7 @@
 <div class="mainComponent">
   <div>
     <mat-action-list *ngFor="let user of allUsers" class="listOfUsers">
-      <button mat-list-item (click)="selectUser(user)" class="buttonInList">
+      <button mat-list-item (click)="selectUser(user)" class="containsInItemUser">
         <div class="textInList">
           логин:{{user.login}}
           <br/>
@@ -18,7 +18,7 @@
   </div>
   <mat-card class="selectedUserComponent">
     <div class="selectedUser">
-      <div> Выбранный пользователь:</div>
+      <div> Выбранный пользователь</div>
       <mat-form-field>
         <input matInput required [(ngModel)]="selectedUser.login" placeholder="Введите логин пользователя">
       </mat-form-field>
@@ -35,7 +35,9 @@
         <input matInput required [(ngModel)]="selectedUser.password" placeholder="Введите пароль пользователя">
       </mat-form-field>
       <mat-form-field>
-        <input matInput required [(ngModel)]="selectedUser.dob" placeholder="Введите дату рождения пользователя">
+        <input matInput required [matDatepicker]="_selectedDate" [(ngModel)]="selectedUser.dob"  placeholder="Введите дату рождения">
+        <mat-datepicker-toggle matSuffix [for]="_selectedDate"></mat-datepicker-toggle>
+        <mat-datepicker #_selectedDate></mat-datepicker>
       </mat-form-field>
     </div>
     <button mat-raised-button (click)="updateUser(selectedUser)"> сохранить</button>
@@ -43,7 +45,7 @@
   </mat-card>
   <mat-card class="createUserComponent">
     <div class="createUser">
-      <div>Создать нового пользователя:</div>
+      <div>Создать нового пользователя</div>
       <mat-form-field>
         <input matInput required [(ngModel)]="createUser.login" placeholder="Введите логин пользователя">
       </mat-form-field>
@@ -60,15 +62,17 @@
         <input matInput required [(ngModel)]="createUser.password" placeholder="Введите пароль пользователя">
       </mat-form-field>
       <mat-form-field>
-        <input matInput required [(ngModel)]="createUser.dob" placeholder="Введите дату рождения пользователя">
+        <input matInput required [matDatepicker]="picker" [(ngModel)]="createUser.dob"  placeholder="Введите дату рождения">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
-    <button mat-raised-button class="createButton" (click)="createUserFunc(createUser)">create</button>
+    <button mat-raised-button class="createButton" (click)="createUserFunc(createUser)">создать</button>
   </mat-card>
   <div class="journalOfUser">
     <mat-list *ngFor="let record of journal" >
-      <div>Откуда: {{numberOfCard: record.fromBalance}}</div>
-      <div>Куда: {{numberOfCard: record.toBalance}}</div>
+      <div>Откуда: {{record.fromBalance}}</div>
+      <div>Куда: {{record.toBalance}}</div>
       <div>Cумма: {{record.journal.money}}</div>
       <div>Время: {{record.journal.time | date: 'short'}}</div>
       <div>Комментарий: {{record.journal.transferText}}</div>

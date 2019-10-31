@@ -1,0 +1,26 @@
+<mat-card class="createUserComponent">
+  <div class="createUser">
+    <div>Регистрация</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createUser.login" placeholder="Введите логин">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createUser.name" placeholder="Введите имя">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createUser.surname" placeholder="Введите фамилию">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createUser.lastname" placeholder="Введите отчество">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createUser.password" placeholder="Введите пароль">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [matDatepicker]="_createUser" [(ngModel)]="createUser.dob"  placeholder="Введите дату рождения">
+      <mat-datepicker-toggle matSuffix [for]="_createUser"></mat-datepicker-toggle>
+      <mat-datepicker #_createUser></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button class="createButton" (click)="createUserFunc(createUser)">создать</button>
+</mat-card>

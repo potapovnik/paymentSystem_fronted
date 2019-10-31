@@ -15,9 +15,15 @@ export class BalanceService {
   constructor(private http: HttpClient) {
   }
 
-  lockBalance(id: number, isLock: boolean): Observable<boolean> {
-    const url = this.balance + '/isLock';
-    console.log(url + '- put ' + isLock + ' balance');
+  lockBalance(id: number): Observable<boolean> {
+    const url = this.balance + '/lock' + '?id=' + id;
+    console.log(url + '- put lock balance');
+    return this.http.put<boolean>(url, {headers: this.head});
+  }
+
+  unlockBalance(id: number): Observable<boolean> {
+    const url = this.balance + '/unlock' + '?id=' + id;
+    console.log(url + '- put unlock balance');
     return this.http.put<boolean>(url, {headers: this.head});
   }
 

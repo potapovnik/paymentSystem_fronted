@@ -1,31 +1,45 @@
-.mainComponent{
+.mainComponent {
   display: flex;
   flex-direction: row;
 }
 
-.selectedUserComponent{
+.selectedUserComponent {
   margin-left: 40px;
   margin-top: 3%;
 }
-.createUserComponent{
+
+.createUserComponent {
   margin-left: 40px;
   margin-top: 3%;
 }
-.buttonInList{
+
+* > .mat-list .mat-list-item .mat-list-item-content,
+.mat-list .mat-list-option .mat-list-item-content,
+.mat-nav-list .mat-list-item .mat-list-item-content,
+.mat-nav-list .mat-list-option .mat-list-item-content,
+.mat-selection-list .mat-list-item .mat-list-item-content,
+.mat-selection-list .mat-list-option .mat-list-item-content {
   margin-bottom: 10px;
-}
-.selectedUser{
   display: flex;
   flex-direction: column;
 }
-.createUser{
+
+.selectedUser {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.createUser {
   display: flex;
   flex-direction: column;
 }
-.textInList{
+
+.textInList {
   white-space: pre-line;
 }
-.createButton{
+
+.createButton {
   width: 80%;
   margin-top: 10px;
   margin-left: 10%;

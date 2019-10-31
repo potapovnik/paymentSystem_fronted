@@ -1,12 +1,22 @@
 <mat-toolbar class="navigate">
-  <div>
+  <div [hidden]="!authenticated()">
     <a mat-button [routerLink]="'/users'">
       пользователи
     </a>
   </div>
-  <div>
+  <div [hidden]="!authenticated()">
     <a mat-button [routerLink]="'/balance'">
       баланс
+    </a>
+  </div>
+  <div [hidden]="authenticated()">
+    <a mat-button [routerLink]="'/registration'">
+      Зарегестрироваться
+    </a>
+  </div>
+  <div [hidden]="authenticated()">
+    <a mat-button [routerLink]="'/login'">
+      Войти
     </a>
   </div>
 </mat-toolbar>

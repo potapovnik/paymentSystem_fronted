@@ -33,6 +33,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.selectedUser = new User();
     this.createUser = new User();
+    this.createUser.dob = new Date();
     this.getAllUsers();
   }
 
@@ -65,7 +66,12 @@ export class UsersComponent implements OnInit {
   }
 
   public lockBalance(id: number, isLock: boolean) {
-    this.balanceService.lockBalance(id, isLock);
+    if (isLock === true) {
+      this.balanceService.lockBalance(id).subscribe();
+    } else {
+      this.balanceService.unlockBalance(id).subscribe();
+    }
+
   }
 
   reloadData() {

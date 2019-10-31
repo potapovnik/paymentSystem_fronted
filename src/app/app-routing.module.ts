@@ -1,11 +1,12 @@
-
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {UsersComponent} from './users/users.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {NumberOfCard, UsersComponent} from './users/users.component';
 import {BalanceComponent} from './balance/balance.component';
 import {ReplenishComponent} from './balance/replenish/replenish.component';
 import {WithdrawComponent} from './balance/withdraw/withdraw.component';
-import {NumberOfCard} from './users/pipeNumberOfCard';
+import {RegistrationComponent} from './registration/registration.component';
+import {LoginComponent} from './login/login.component';
+import {FormsModule} from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -23,11 +24,25 @@ const routes: Routes = [
   {
     path: 'balance/withdraw',
     component: WithdrawComponent
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '',
+    component: LoginComponent
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  declarations: [NumberOfCard]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -8,10 +8,21 @@ import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { UsersComponent } from './users/users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatListModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatListModule, MatNativeDateModule,
+  MatToolbarModule
+} from '@angular/material';
 import { BalanceComponent } from './balance/balance.component';
 import { ReplenishComponent } from './balance/replenish/replenish.component';
 import { WithdrawComponent } from './balance/withdraw/withdraw.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { LoginComponent } from './login/login.component';
+import {AppService} from './AppService';
 
 @NgModule({
   declarations: [
@@ -19,7 +30,9 @@ import { WithdrawComponent } from './balance/withdraw/withdraw.component';
     UsersComponent,
     BalanceComponent,
     ReplenishComponent,
-    WithdrawComponent
+    WithdrawComponent,
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +46,11 @@ import { WithdrawComponent } from './balance/withdraw/withdraw.component';
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
