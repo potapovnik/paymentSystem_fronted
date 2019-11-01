@@ -7,6 +7,7 @@ import {WithdrawComponent} from './balance/withdraw/withdraw.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
+import {PaymentComponent} from './payment/payment.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent
+  },
+  {
+    path: 'payment',
+    component: PaymentComponent
   }
 ];
 

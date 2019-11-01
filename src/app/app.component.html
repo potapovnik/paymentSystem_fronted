@@ -9,6 +9,11 @@
       баланс
     </a>
   </div>
+  <div [hidden]="!authenticated()">
+    <a mat-button [routerLink]="'/payment'">
+      платежи
+    </a>
+  </div>
   <div [hidden]="authenticated()">
     <a mat-button [routerLink]="'/registration'">
       Зарегестрироваться
@@ -17,6 +22,11 @@
   <div [hidden]="authenticated()">
     <a mat-button [routerLink]="'/login'">
       Войти
+    </a>
+  </div>
+  <div [hidden]="!authenticated()">
+    <a mat-button (click)="logout()">
+      выйти
     </a>
   </div>
 </mat-toolbar>

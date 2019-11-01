@@ -1,0 +1,14 @@
+<div class="window">
+
+  <mat-action-list *ngFor="let company of allCompany">
+    <button  mat-list-item  (click)="getAllPaymentOfCompany(company.id)">{{company.name}}</button>
+  </mat-action-list>
+
+  <mat-action-list *ngFor="let paymentCompany of allPaymentOfCompany" class="paymentOfCompany">
+    <button mat-list-item >
+      Услуга:{{paymentCompany.name}}
+      <br/>
+      Стоимость: {{paymentCompany.amount}}
+    </button>
+  </mat-action-list>
+</div>

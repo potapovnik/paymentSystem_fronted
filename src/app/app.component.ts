@@ -8,20 +8,21 @@ import {AppService} from './AppService';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
+
 export class AppComponent {
   title = 'fronted';
 
   constructor(private app: AppService, private http: HttpClient, private router: Router) {
     this.app.authenticate(undefined, undefined);
   }
-/*
+
   logout() {
-    this.http.post('logout', {}).finally(() => {
+    this.http.post('paymentSystem/logout', {}).subscribe(resp => {
       this.app.authenticated = false;
-      this.router.navigateByUrl('/login');
-    }).subscribe();
+    });
   }
-*/
+
   authenticated() {
     return this.app.authenticated;
   }
