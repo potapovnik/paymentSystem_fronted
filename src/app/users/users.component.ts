@@ -33,7 +33,6 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.selectedUser = new User();
     this.createUser = new User();
-    this.createUser.dob = new Date();
     this.getAllUsers();
   }
 

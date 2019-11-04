@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Balance} from './balance';
 import {BalanceService} from './balance.service';
 import {Router} from '@angular/router';
+import {User} from '../users/users';
 
 @Component({
   selector: 'app-balance',
@@ -10,18 +11,20 @@ import {Router} from '@angular/router';
 })
 export class BalanceComponent implements OnInit {
   balanceOfUser: Balance;
+  currentUser: User;
 
   constructor(private balanceService: BalanceService, private router: Router) {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.balanceOfUser = new Balance();
-    this.balanceService.getBalanceOfCurrentUser(1).subscribe(resp => {
+    this.balanceService.getBalanceOfCurrentUser(this.currentUser.id).subscribe(resp => {
       this.balanceOfUser.numberOfBalance = resp.numberOfBalance;
       this.balanceOfUser.money = resp.money;
       this.balanceOfUser.isLock = resp.isLock;
       this.balanceOfUser.userId = resp.userId;
-    }); // todo изменить на айди тек.пользователя
+    });
   }
 
 

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AppService} from './AppService';
+import {LoginComponent} from './login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -19,11 +20,20 @@ export class AppComponent {
 
   logout() {
     this.http.post('paymentSystem/logout', {}).subscribe(resp => {
+      this.router.navigateByUrl('/login');
       this.app.authenticated = false;
     });
   }
 
   authenticated() {
     return this.app.authenticated;
+  }
+
+  checkAdmin() {
+    if (JSON.parse(localStorage.getItem('user')).roleId === 2) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

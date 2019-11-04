@@ -21,6 +21,12 @@ export class UserService {
     return this.http.get<User[]>(url, {headers: this.head});
   }
 
+  getUserByLogin(login: String): Observable<User> {
+    const url = this.users + '/byLogin' + '?login=' + login;
+    console.log(url + '- get user by login');
+    return this.http.get<User>(url, {headers: this.head});
+  }
+
   createUser(user: User): Observable<User> {
     const url = this.users;
     console.log(url + '- post user ');

@@ -6,6 +6,7 @@ import {Journal} from '../../entity/journal';
 import {Operation} from '../../enum/operation';
 import {BalanceService} from '../balance.service';
 import {isNumeric} from 'tslint';
+import {User} from '../../users/users';
 
 @Component({
   selector: 'app-replenish',
@@ -19,15 +20,17 @@ export class ReplenishComponent implements OnInit {
   messageForTransfer: string;
   numberCurrentBalance: string;
   isLock: boolean;
+  currentUser: User;
 
   constructor(private location: PlatformLocation, private balanceService: BalanceService) {
   }
 
   ngOnInit() {
-    this.balanceService.getBalanceOfCurrentUser(1).subscribe(resp => {
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
+    this.balanceService.getBalanceOfCurrentUser(this.currentUser.id).subscribe(resp => {
       this.numberCurrentBalance = resp.numberOfBalance;
       this.isLock = resp.isLock;
-    }); // todo изменить на айди тек.пользователя
+    });
   }
 
   transferFromCard() {
@@ -37,7 +40,6 @@ export class ReplenishComponent implements OnInit {
     transfer.toBalance = this.numberCurrentBalance;
     transfer.journal.money = this.moneyForTransfer;
     transfer.journal.operationId = Operation.TRANSFER_FROM_CARD;
-    transfer.journal.time = new Date();
     transfer.journal.transferText = this.messageForTransfer;
     this.balanceService.replenishFromCardOnBalance(transfer).subscribe();
   }

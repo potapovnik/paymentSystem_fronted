@@ -6,6 +6,7 @@ import {BalanceService} from '../balance.service';
 import {TransferDto} from '../../entity/transferDto';
 import {Operation} from '../../enum/operation';
 import {Balance} from '../balance';
+import {User} from '../../users/users';
 
 @Component({
   selector: 'app-withdraw',
@@ -22,15 +23,18 @@ export class WithdrawComponent implements OnInit {
   messageWithdrawToBalance: string;
   numberCurrentBalance: string;
   availableBalance: number;
+  currentUser: User;
 
   constructor(private balanceService: BalanceService, private location: PlatformLocation, private route: ActivatedRoute) {
-    this.balanceService.getBalanceOfCurrentUser(1).subscribe(resp => {
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
+    this.balanceService.getBalanceOfCurrentUser(this.currentUser.id).subscribe(resp => {
       this.numberCurrentBalance = resp.numberOfBalance;
       this.availableBalance = resp.money;
-    }); // todo изменить на айди тек.пользователя
+    });
   }
 
   ngOnInit() {
+
   }
 
   transferOnBalance() {
@@ -40,7 +44,6 @@ export class WithdrawComponent implements OnInit {
     transfer.toBalance = this.balanceToWithdraw;
     transfer.journal.money = this.moneyForBalance;
     transfer.journal.operationId = Operation.BALANCE_TO_BALANCE;
-    transfer.journal.time = new Date();
     transfer.journal.transferText = this.messageWithdrawToBalance;
     this.balanceService.withdrawFromBalanceOnBalance(transfer).subscribe();
   }
@@ -52,7 +55,6 @@ export class WithdrawComponent implements OnInit {
     transfer.toBalance = this.cardToWithdraw;
     transfer.journal.money = this.moneyForCard;
     transfer.journal.operationId = Operation.TRANSFER_TO_CARD;
-    transfer.journal.time = new Date();
     transfer.journal.transferText = this.messageWithdrawToCard;
     this.balanceService.withdrawFromBalanceOnCard(transfer).subscribe();
   }

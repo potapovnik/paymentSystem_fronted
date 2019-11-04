@@ -1,20 +1,26 @@
 <div class="mainComponent">
-  <div>
-    <mat-action-list *ngFor="let user of allUsers" class="listOfUsers">
-      <button mat-list-item (click)="selectUser(user)" class="containsInItemUser">
-        <div class="textInList">
-          логин:{{user.login}}
-          <br/>
-          имя:{{user.name}}
-          <br/>
-          фамилия:{{user.surname}}
-          <br/>
+  <div class="containerOfList">
+      <mat-expansion-panel *ngFor="let user of allUsers" class="listOfUsers" (click)="selectUser(user)">
+        <mat-expansion-panel-header class="headerOfItem">
+          <mat-panel-title class="titleOfItem">
+            <div>
+              логин:{{user.login}}
+              <br/>
+              имя:{{user.name}}
+              <br/>
+              фамилия:{{user.surname}}
+              <br/>
+            </div>
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="bodyOfItemOfList">
+          <button mat-raised-button (click)="showHistoryOfUser(user.id)">Посмотреть историю</button>
+          <button mat-raised-button (click)="lockBalance(user.id,true)">Заблокировать баланс</button>
+          <button mat-raised-button (click)="lockBalance(user.id,false)">Разблокировать баланс</button>
         </div>
-        <button mat-raised-button (click)="showHistoryOfUser(user.id)">Посмотреть историю</button>
-        <button mat-raised-button (click)="lockBalance(user.id,true)">Заблокировать баланс</button>
-        <button mat-raised-button (click)="lockBalance(user.id,false)">Разблокировать баланс</button>
-      </button>
-    </mat-action-list>
+      </mat-expansion-panel>
   </div>
   <mat-card class="selectedUserComponent">
     <div class="selectedUser">
@@ -32,10 +38,8 @@
         <input matInput required [(ngModel)]="selectedUser.lastname" placeholder="Введите отчество пользователя">
       </mat-form-field>
       <mat-form-field>
-        <input matInput required [(ngModel)]="selectedUser.password" placeholder="Введите пароль пользователя">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput required [matDatepicker]="_selectedDate" [(ngModel)]="selectedUser.dob"  placeholder="Введите дату рождения">
+        <input matInput required [matDatepicker]="_selectedDate" [(ngModel)]="selectedUser.dob"
+               placeholder="Введите дату рождения">
         <mat-datepicker-toggle matSuffix [for]="_selectedDate"></mat-datepicker-toggle>
         <mat-datepicker #_selectedDate></mat-datepicker>
       </mat-form-field>
@@ -62,15 +66,17 @@
         <input matInput required [(ngModel)]="createUser.password" placeholder="Введите пароль пользователя">
       </mat-form-field>
       <mat-form-field>
-        <input matInput required [matDatepicker]="picker" [(ngModel)]="createUser.dob"  placeholder="Введите дату рождения">
+        <input matInput required [matDatepicker]="picker" [(ngModel)]="createUser.dob"
+               placeholder="Введите дату рождения">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
     <button mat-raised-button class="createButton" (click)="createUserFunc(createUser)">создать</button>
   </mat-card>
-  <div class="journalOfUser">
-    <mat-list *ngFor="let record of journal" >
+
+  <div  class="journalOfUser" >
+    <mat-list *ngFor="let record of journal">
       <div>Откуда: {{record.fromBalance}}</div>
       <div>Куда: {{record.toBalance}}</div>
       <div>Cумма: {{record.journal.money}}</div>

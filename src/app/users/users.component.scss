@@ -13,15 +13,14 @@
   margin-top: 3%;
 }
 
-* > .mat-list .mat-list-item .mat-list-item-content,
-.mat-list .mat-list-option .mat-list-item-content,
-.mat-nav-list .mat-list-item .mat-list-item-content,
-.mat-nav-list .mat-list-option .mat-list-item-content,
-.mat-selection-list .mat-list-item .mat-list-item-content,
-.mat-selection-list .mat-list-option .mat-list-item-content {
-  margin-bottom: 10px;
+.bodyOfItemOfList {
   display: flex;
   flex-direction: column;
+}
+
+.headerOfItem {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .selectedUser {
@@ -43,4 +42,15 @@
   width: 80%;
   margin-top: 10px;
   margin-left: 10%;
+}
+
+.scrollable {
+  overflow-y: auto;
+  height: 100%;
+}
+.listOfUsers{
+  margin-bottom: 1%;
+}
+.containerOfList{
+  margin-top: 3%;
 }

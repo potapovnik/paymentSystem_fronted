@@ -1,6 +1,29 @@
-.window{
-  width: 35%;
+.window {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
 }
-.paymentOfCompany{
+
+.listPaymentOfCompany {
   text-align: left;
 }
+
+.payment {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment > div {
+  display: flex;
+  flex-direction: column;
+}
+.paymentBalanceButton{
+  width: 100%;
+}
+.paymentCard{
+  margin-top: 10px;
+}
+.PaymentBalanceAndCard{
+  margin-top: 10px;
+}
+

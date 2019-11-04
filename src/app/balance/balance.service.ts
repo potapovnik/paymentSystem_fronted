@@ -28,7 +28,7 @@ export class BalanceService {
   }
 
   getBalanceOfCurrentUser(id: number): Observable<Balance> {
-    const url = this.balance + '?idUser=' + id;
+    const url = this.balance + '/byId' + '?idUser=' + id;
     console.log(url + '- get all balance of current user');
     return this.http.get<Balance>(url, {headers: this.head});
   }
@@ -55,5 +55,11 @@ export class BalanceService {
     const url = this.transfer + '/replenishOnBalance';
     console.log(url + '- replenish on balance');
     return this.http.post<boolean>(url, transfer, {headers: this.head});
+  }
+
+  getBalance(id: number): Observable<Balance> {
+    const url = this.balance + '?id=' + id;
+    console.log(url + '- get balance with id');
+    return this.http.get<Balance>(url, {headers: this.head});
   }
 }

@@ -1,14 +1,56 @@
 <div class="window">
+  <mat-card>
+    <div>Все фирмы</div>
+    <mat-action-list *ngFor="let company of allCompany" class="listOFCompany">
+      <button mat-list-item (click)="getAllPaymentOfCompany(company)">{{company.name}}</button>
+    </mat-action-list>
+  </mat-card>
+  <mat-card>
+    <div>Список услуг</div>
+    <mat-action-list *ngFor="let paymentCompany of allPaymentOfCompany" class="listPaymentOfCompany">
+      <button mat-list-item (click)="selectPaymentOfCompany(paymentCompany)">
+        Услуга:{{paymentCompany.name}}
+        <br/>
+        Стоимость: {{paymentCompany.amount}}
+      </button>
+    </mat-action-list>
+  </mat-card>
 
-  <mat-action-list *ngFor="let company of allCompany">
-    <button  mat-list-item  (click)="getAllPaymentOfCompany(company.id)">{{company.name}}</button>
-  </mat-action-list>
+  <mat-card>
+    <div class="payment">
+      <div>Оплата</div>
+      <div [hidden]="select">Выберете услугу для оплаты</div>
 
-  <mat-action-list *ngFor="let paymentCompany of allPaymentOfCompany" class="paymentOfCompany">
-    <button mat-list-item >
-      Услуга:{{paymentCompany.name}}
-      <br/>
-      Стоимость: {{paymentCompany.amount}}
-    </button>
-  </mat-action-list>
+
+      <div class="paymentBalance">
+
+        <div>
+          <button mat-raised-button (click)="paymentFromBalance()" [disabled]="!select" class="paymentBalanceButton">Оплатить с
+            баланса
+          </button>
+        </div>
+      </div>
+
+      <div class="paymentCard">
+        <div >Оплата картой</div>
+          <mat-form-field>
+            <input matInput required [(ngModel)]="numberOfCard" placeholder="Введите номер карты">
+          </mat-form-field>
+          <button mat-raised-button (click)="paymentFromCard()" [disabled]="!select">Оплатить картой</button>
+      </div>
+
+      <div class="PaymentBalanceAndCard">
+          <div>Оплата балансом и картой</div>
+          <mat-form-field>
+            <input matInput required [(ngModel)]="moneyForCardAndBalance"
+                   placeholder="Сумма списанная с баланса">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput required [(ngModel)]="numberOfCardForBandC" placeholder="Введите номер карты">
+          </mat-form-field>
+          <button mat-raised-button [disabled]="!select" (click)="paymentFromCardAndBalance()">Оплатить</button>
+      </div>
+
+    </div>
+  </mat-card>
 </div>

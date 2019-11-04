@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Company} from '../entity/company';
 import {PaymentCompany} from '../entity/paymentCompany';
+import {PaymentUser} from '../entity/paymentUser';
+import {Payment} from '../entity/payment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,17 @@ export class PaymentService {
     const url = this.paymentCompany + '/allPaymentOfCompany/' + '?idCompany=' + idCompany;
     console.log(url + '-get all payment of company ');
     return this.http.get<PaymentCompany[]>(url, {headers: this.head});
+  }
+
+  addPaymentFromBalance(payment: Payment): Observable<PaymentCompany[]> {
+    const url = this.paymentCompany + '/fromBalance';
+    console.log(url + '-add payment ');
+    return this.http.post<PaymentCompany[]>(url, payment, {headers: this.head});
+  }
+
+  addPaymentFromCard(payment: Payment): Observable<PaymentCompany[]> {
+    const url = this.paymentCompany + '/fromCard';
+    console.log(url + '-add payment ');
+    return this.http.post<PaymentCompany[]>(url, payment, {headers: this.head});
   }
 }

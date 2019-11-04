@@ -11,7 +11,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDatepickerModule,
+  MatDatepickerModule, MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
   MatListModule, MatNativeDateModule,
@@ -51,6 +51,7 @@ import { PaymentComponent } from './payment/payment.component';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatExpansionModule,
     BrowserAnimationsModule
   ],
   providers: [AppService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}],
