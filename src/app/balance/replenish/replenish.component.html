@@ -1,6 +1,7 @@
 <div class="replenishFromBalance">
   <mat-card class="containerForReplenish">
     <div class="text"> Пополнить с карты</div>
+    <div *ngIf="errorReplenish!==null" style="color: red">{{errorReplenish}}</div>
     <mat-form-field>
       <input matInput required [(ngModel)]="CardForReplenish" placeholder="Введите номер карты">
     </mat-form-field>

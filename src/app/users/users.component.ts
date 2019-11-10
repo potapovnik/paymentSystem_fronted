@@ -3,6 +3,8 @@ import {User} from './users';
 import {UserService} from './user.service';
 import {BalanceService} from '../balance/balance.service';
 import {TransferDto} from '../entity/transferDto';
+import {MatDialog} from '@angular/material';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 
 @Pipe({name: 'numberOfCard'})
@@ -16,6 +18,10 @@ export class NumberOfCard implements PipeTransform {
   }
 }
 
+export interface DialogData {
+  user: User;
+}
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -27,7 +33,7 @@ export class UsersComponent implements OnInit {
   createUser: User;
   journal: TransferDto[];
 
-  constructor(private userService: UserService, private balanceService: BalanceService) {
+  constructor(public dialog: MatDialog, private userService: UserService, private balanceService: BalanceService) {
   }
 
   ngOnInit() {
@@ -75,5 +81,12 @@ export class UsersComponent implements OnInit {
 
   reloadData() {
     this.journal = [...this.journal];
+  }
+
+  openChangePasswordWindow() {
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      width: '250px',
+      data: {user: this.selectedUser}
+    });
   }
 }

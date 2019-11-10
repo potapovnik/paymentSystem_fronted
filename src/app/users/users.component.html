@@ -1,26 +1,27 @@
 <div class="mainComponent">
   <div class="containerOfList">
-      <mat-expansion-panel *ngFor="let user of allUsers" class="listOfUsers" (click)="selectUser(user)">
-        <mat-expansion-panel-header class="headerOfItem">
-          <mat-panel-title class="titleOfItem">
-            <div>
-              логин:{{user.login}}
-              <br/>
-              имя:{{user.name}}
-              <br/>
-              фамилия:{{user.surname}}
-              <br/>
-            </div>
-          </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="bodyOfItemOfList">
-          <button mat-raised-button (click)="showHistoryOfUser(user.id)">Посмотреть историю</button>
-          <button mat-raised-button (click)="lockBalance(user.id,true)">Заблокировать баланс</button>
-          <button mat-raised-button (click)="lockBalance(user.id,false)">Разблокировать баланс</button>
-        </div>
-      </mat-expansion-panel>
+    <mat-expansion-panel *ngFor="let user of allUsers" class="listOfUsers" (click)="selectUser(user)">
+      <mat-expansion-panel-header class="headerOfItem">
+        <mat-panel-title class="titleOfItem">
+          <div>
+            логин:{{user.login}}
+            <br/>
+            имя:{{user.name}}
+            <br/>
+            фамилия:{{user.surname}}
+            <br/>
+          </div>
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="bodyOfItemOfList">
+        <button mat-raised-button (click)="showHistoryOfUser(user.id)">Посмотреть историю</button>
+        <button mat-raised-button (click)="lockBalance(user.id,true)">Заблокировать баланс</button>
+        <button mat-raised-button (click)="lockBalance(user.id,false)">Разблокировать баланс</button>
+        <button mat-raised-button (click)="openChangePasswordWindow()">Изменить пароль</button>
+      </div>
+    </mat-expansion-panel>
   </div>
   <mat-card class="selectedUserComponent">
     <div class="selectedUser">
@@ -75,13 +76,18 @@
     <button mat-raised-button class="createButton" (click)="createUserFunc(createUser)">создать</button>
   </mat-card>
 
-  <div  class="journalOfUser" >
-    <mat-list *ngFor="let record of journal">
-      <div>Откуда: {{record.fromBalance}}</div>
-      <div>Куда: {{record.toBalance}}</div>
-      <div>Cумма: {{record.journal.money}}</div>
-      <div>Время: {{record.journal.time | date: 'short'}}</div>
-      <div>Комментарий: {{record.journal.transferText}}</div>
-    </mat-list>
+  <div class="journalOfUser">
+    <mat-card class="matCardForJournal">
+      <div>Журнал переводов связанных с пользователем</div>
+      <mat-list *ngFor="let record of journal" >
+        <mat-list-item class="itemOfJournal">
+          <div matLine>Откуда: {{record.fromBalance}}</div>
+          <div matLine> Куда: {{record.toBalance}}</div>
+          <div matLine>Cумма: {{record.journal.money}}</div>
+          <div matLine>Время: {{record.journal.time | date: 'short'}}</div>
+          <div matLine>Комментарий: {{record.journal.transferText}}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
   </div>
 </div>

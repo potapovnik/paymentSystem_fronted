@@ -12,6 +12,7 @@ import {User} from '../users/users';
 export class BalanceComponent implements OnInit {
   balanceOfUser: Balance;
   currentUser: User;
+  errBalance: String;
 
   constructor(private balanceService: BalanceService, private router: Router) {
   }
@@ -24,7 +25,7 @@ export class BalanceComponent implements OnInit {
       this.balanceOfUser.money = resp.money;
       this.balanceOfUser.isLock = resp.isLock;
       this.balanceOfUser.userId = resp.userId;
-    });
+    }, err => this.errBalance = err.error.message);
   }
 
 

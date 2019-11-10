@@ -29,12 +29,13 @@ export class PaymentComponent implements OnInit {
   select = false;
 
   constructor(private paymentService: PaymentService, private balanceService: BalanceService) {
+    this.currentUser = null;
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
+    this.currentBalance = JSON.parse(localStorage.getItem('balance'));
+     this.getAllCompany();
   }
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('user'));
-    this.currentBalance = JSON.parse(localStorage.getItem('balance'));
-    this.getAllCompany();
   }
 
   getAllCompany() {
@@ -68,7 +69,7 @@ export class PaymentComponent implements OnInit {
       newTransfer.toBalance = resp.numberOfBalance;
       newTransfer.journal = new Journal();
       newTransfer.journal.money = this.selectedPaymentOfCompany.amount;
-      newTransfer.journal.operationId = Operation.PAYMENT__FROM_BALANCE_TO_BALANCE;
+      newTransfer.journal.operationId = Operation.PAYMENT_FROM_BALANCE_TO_BALANCE;
       const payment = new Payment();
       payment.paymentUser = newPaymentUser;
       payment.transfer = newTransfer;

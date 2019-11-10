@@ -1,4 +1,14 @@
 <mat-toolbar class="navigate">
+  <div [hidden]="authenticated()"  class="login">
+    <a mat-button [routerLink]="'/login'">
+      Войти
+    </a>
+  </div>
+  <div [hidden]="authenticated()">
+    <a mat-button [routerLink]="'/registration'">
+      зарегестрироваться
+    </a>
+  </div>
   <div [hidden]="!authenticated()">
     <a mat-button [routerLink]="'/users'">
       пользователи
@@ -9,19 +19,9 @@
       баланс
     </a>
   </div>
-  <div [hidden]="!authenticated()">
+  <div >
     <a mat-button [routerLink]="'/payment'">
       платежи
-    </a>
-  </div>
-  <div [hidden]="authenticated()"  class="login">
-    <a mat-button [routerLink]="'/login'">
-      Войти
-    </a>
-  </div>
-  <div [hidden]="authenticated()">
-    <a mat-button [routerLink]="'/registration'">
-      Зарегестрироваться
     </a>
   </div>
   <div [hidden]="!authenticated()" class="logout">

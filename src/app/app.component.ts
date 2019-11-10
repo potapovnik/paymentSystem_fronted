@@ -15,12 +15,11 @@ export class AppComponent {
   title = 'fronted';
 
   constructor(private app: AppService, private http: HttpClient, private router: Router) {
-    this.app.authenticate(undefined, undefined);
   }
 
   logout() {
     this.http.post('paymentSystem/logout', {}).subscribe(resp => {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('');
       this.app.authenticated = false;
     });
   }

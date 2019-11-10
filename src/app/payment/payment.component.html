@@ -21,8 +21,7 @@
       <div>Оплата</div>
       <div [hidden]="select">Выберете услугу для оплаты</div>
 
-
-      <div class="paymentBalance">
+      <div class="paymentBalance" [hidden]="currentUser===null">
 
         <div>
           <button mat-raised-button (click)="paymentFromBalance()" [disabled]="!select" class="paymentBalanceButton">Оплатить с
@@ -39,7 +38,7 @@
           <button mat-raised-button (click)="paymentFromCard()" [disabled]="!select">Оплатить картой</button>
       </div>
 
-      <div class="PaymentBalanceAndCard">
+      <div class="PaymentBalanceAndCard" [hidden]="currentUser===null">
           <div>Оплата балансом и картой</div>
           <mat-form-field>
             <input matInput required [(ngModel)]="moneyForCardAndBalance"

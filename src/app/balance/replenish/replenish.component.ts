@@ -14,13 +14,13 @@ import {User} from '../../users/users';
   styleUrls: ['./replenish.component.scss']
 })
 export class ReplenishComponent implements OnInit {
-  balanceFromReplenish: number;
   CardForReplenish: string;
   moneyForTransfer: number;
   messageForTransfer: string;
   numberCurrentBalance: string;
   isLock: boolean;
   currentUser: User;
+  errorReplenish: string;
 
   constructor(private location: PlatformLocation, private balanceService: BalanceService) {
   }
@@ -34,6 +34,7 @@ export class ReplenishComponent implements OnInit {
   }
 
   transferFromCard() {
+    this.errorReplenish = null;
     const transfer = new TransferDto();
     transfer.journal = new Journal();
     transfer.fromBalance = this.CardForReplenish;
@@ -41,7 +42,8 @@ export class ReplenishComponent implements OnInit {
     transfer.journal.money = this.moneyForTransfer;
     transfer.journal.operationId = Operation.TRANSFER_FROM_CARD;
     transfer.journal.transferText = this.messageForTransfer;
-    this.balanceService.replenishFromCardOnBalance(transfer).subscribe();
+    this.balanceService.replenishFromCardOnBalance(transfer).subscribe(resp => {},
+    err => this.errorReplenish = err.error.message);
   }
 
   goBack(): void {

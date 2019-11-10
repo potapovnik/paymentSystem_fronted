@@ -14,8 +14,6 @@ import {BalanceService} from '../balance/balance.service';
 })
 export class LoginComponent implements OnInit {
   credentials = {username: '', password: ''};
-  currentUser: User;
-  currentBalance: Balance;
 
   constructor(private app: AppService, private http: HttpClient, private router: Router,
               private userService: UserService, private balanceService: BalanceService) {

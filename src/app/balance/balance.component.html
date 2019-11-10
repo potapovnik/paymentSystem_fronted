@@ -1,8 +1,10 @@
 <mat-card class="window">
   <div class="dataOfBalance">
+    <div *ngIf="balanceOfUser.isLock">Баланс заблокирован</div>
+    <label class="labelBalance">Ваш баланс</label>
+    <div *ngIf="errBalance!==null">{{errBalance}}</div>
     <div>Номер счёта: {{balanceOfUser.numberOfBalance}}</div>
     <div>Доступный баланс: {{balanceOfUser.money}}</div>
-    <div>Заблокирован: {{balanceOfUser.isLock}}</div>
   </div>
   <div class="buttons">
     <button mat-raised-button class="replenishButton" (click)="replenishBalance()"> Пополнить</button>

@@ -9,8 +9,7 @@ export class AppService {
 
   authenticated = false;
 
-  constructor(private http: HttpClient,
-              private userService: UserService, private balanceService: BalanceService) {
+  constructor(private http: HttpClient) {
   }
 
   authenticate(credentials, callback) {
@@ -19,7 +18,7 @@ export class AppService {
       authorization : 'Basic ' + btoa(credentials.username + ':' + credentials.password)
     } : {});
 
-    this.http.get('/paymentSystem/user/current', {headers: headers}).subscribe(response => {
+    this.http.get(  '/paymentSystem/user/current', {headers: headers}).subscribe(response => {
       if (response['name']) {
         this.authenticated = true;
 

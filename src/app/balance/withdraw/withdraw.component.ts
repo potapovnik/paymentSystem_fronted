@@ -24,6 +24,8 @@ export class WithdrawComponent implements OnInit {
   numberCurrentBalance: string;
   availableBalance: number;
   currentUser: User;
+  errorTransferOnBalance: String;
+  errorTransferOnCard: String;
 
   constructor(private balanceService: BalanceService, private location: PlatformLocation, private route: ActivatedRoute) {
     this.currentUser = JSON.parse(localStorage.getItem('user'));
@@ -38,6 +40,7 @@ export class WithdrawComponent implements OnInit {
   }
 
   transferOnBalance() {
+    this.errorTransferOnBalance = null;
     const transfer = new TransferDto();
     transfer.journal = new Journal();
     transfer.fromBalance = this.numberCurrentBalance;
@@ -45,10 +48,13 @@ export class WithdrawComponent implements OnInit {
     transfer.journal.money = this.moneyForBalance;
     transfer.journal.operationId = Operation.BALANCE_TO_BALANCE;
     transfer.journal.transferText = this.messageWithdrawToBalance;
-    this.balanceService.withdrawFromBalanceOnBalance(transfer).subscribe();
+    this.balanceService.withdrawFromBalanceOnBalance(transfer).subscribe(r => {
+      },
+      err => this.errorTransferOnBalance = err.error.message);
   }
 
   transferOnCard() {
+    this.errorTransferOnCard = null;
     const transfer = new TransferDto();
     transfer.journal = new Journal();
     transfer.fromBalance = this.numberCurrentBalance;
@@ -56,7 +62,10 @@ export class WithdrawComponent implements OnInit {
     transfer.journal.money = this.moneyForCard;
     transfer.journal.operationId = Operation.TRANSFER_TO_CARD;
     transfer.journal.transferText = this.messageWithdrawToCard;
-    this.balanceService.withdrawFromBalanceOnCard(transfer).subscribe();
+    this.balanceService.withdrawFromBalanceOnCard(transfer).subscribe(r => {
+      },
+      err => {this.errorTransferOnCard = err.error.message;
+      });
   }
 
   goBack(): void {

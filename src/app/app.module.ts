@@ -24,7 +24,8 @@ import {RegistrationComponent} from './registration/registration.component';
 import {LoginComponent} from './login/login.component';
 import {AppService} from './AppService';
 import {XhrInterceptor} from './XhrInterceptor';
-import { PaymentComponent } from './payment/payment.component';
+import {PaymentComponent} from './payment/payment.component';
+import {ChangePasswordComponent} from './users/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PaymentComponent } from './payment/payment.component';
     WithdrawComponent,
     RegistrationComponent,
     LoginComponent,
-    PaymentComponent
+    PaymentComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { PaymentComponent } from './payment/payment.component';
     MatExpansionModule,
     BrowserAnimationsModule
   ],
+  entryComponents: [ ChangePasswordComponent],
   providers: [AppService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

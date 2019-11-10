@@ -1,6 +1,7 @@
 <div class="windowOfWithdraw">
   <div class="withdrawToBalance">
     <div class="text">Перевести на баланс</div>
+    <div *ngIf="errorTransferOnBalance!==null" style="color: red">{{errorTransferOnBalance}}</div>
     <mat-form-field>
       <input matInput required [(ngModel)]="balanceToWithdraw" placeholder="Введите номер баланса">
     </mat-form-field>
@@ -14,6 +15,7 @@
   </div>
   <div class="withdrawToCard">
     <div class="text">Перевести на карту</div>
+    <div *ngIf="errorTransferOnCard!==null" style="color: red">{{errorTransferOnCard}}</div>
     <mat-form-field>
       <input matInput required [(ngModel)]="cardToWithdraw" placeholder="Введите номер карты">
     </mat-form-field>
@@ -25,5 +27,5 @@
     </mat-form-field>
     <button mat-raised-button (click)="transferOnCard()"> Перевести</button>
   </div>
-  <button  mat-raised-button (click)="goBack()"> назад</button>
+  <button mat-raised-button (click)="goBack()"> назад</button>
 </div>
