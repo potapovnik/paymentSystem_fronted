@@ -32,7 +32,7 @@ export class PaymentComponent implements OnInit {
     this.currentUser = null;
     this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.currentBalance = JSON.parse(localStorage.getItem('balance'));
-     this.getAllCompany();
+    this.getAllCompany();
   }
 
   ngOnInit() {
@@ -79,7 +79,11 @@ export class PaymentComponent implements OnInit {
 
   paymentFromCard() {
     const newPaymentUser = new PaymentUser();
-    newPaymentUser.userId = this.currentUser.id;
+    if (this.currentUser === null) {
+      newPaymentUser.userId = null;
+    } else {
+      newPaymentUser.userId = this.currentUser.id;
+    }
     newPaymentUser.paymentId = this.selectedPaymentOfCompany.id;
     const newTransfer = new TransferDto();
     newTransfer.fromBalance = this.numberOfCard;

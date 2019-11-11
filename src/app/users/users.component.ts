@@ -3,7 +3,7 @@ import {User} from './users';
 import {UserService} from './user.service';
 import {BalanceService} from '../balance/balance.service';
 import {TransferDto} from '../entity/transferDto';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 
 
@@ -33,7 +33,8 @@ export class UsersComponent implements OnInit {
   createUser: User;
   journal: TransferDto[];
 
-  constructor(public dialog: MatDialog, private userService: UserService, private balanceService: BalanceService) {
+  constructor(public dialog: MatDialog, private userService: UserService,
+              private balanceService: BalanceService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -76,6 +77,7 @@ export class UsersComponent implements OnInit {
     } else {
       this.balanceService.unlockBalance(id).subscribe();
     }
+    this.snackBar.open('Баланс Заблокирован', null, {duration: 1000});
 
   }
 

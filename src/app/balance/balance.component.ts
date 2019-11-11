@@ -3,6 +3,7 @@ import {Balance} from './balance';
 import {BalanceService} from './balance.service';
 import {Router} from '@angular/router';
 import {User} from '../users/users';
+import {AppService} from '../AppService';
 
 @Component({
   selector: 'app-balance',
@@ -14,18 +15,12 @@ export class BalanceComponent implements OnInit {
   currentUser: User;
   errBalance: String;
 
-  constructor(private balanceService: BalanceService, private router: Router) {
+  constructor(private balanceService: BalanceService, private router: Router, private app: AppService) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('user'));
-    this.balanceOfUser = new Balance();
-    this.balanceService.getBalanceOfCurrentUser(this.currentUser.id).subscribe(resp => {
-      this.balanceOfUser.numberOfBalance = resp.numberOfBalance;
-      this.balanceOfUser.money = resp.money;
-      this.balanceOfUser.isLock = resp.isLock;
-      this.balanceOfUser.userId = resp.userId;
-    }, err => this.errBalance = err.error.message);
+    this.init();
   }
 
 
@@ -42,4 +37,13 @@ export class BalanceComponent implements OnInit {
     });
   }
 
+  private init() {
+    this.balanceOfUser = new Balance();
+    this.balanceService.getBalanceOfCurrentUser(this.currentUser.id).subscribe(resp => {
+      this.balanceOfUser.numberOfBalance = resp.numberOfBalance;
+      this.balanceOfUser.money = resp.money;
+      this.balanceOfUser.isLock = resp.isLock;
+      this.balanceOfUser.userId = resp.userId;
+    }, err => this.errBalance = err.error.message);
+  }
 }

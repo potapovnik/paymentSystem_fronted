@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AppService} from './AppService';
 import {LoginComponent} from './login/login.component';
+import {User} from './users/users';
 
 @Component({
   selector: 'app-root',
@@ -12,27 +13,23 @@ import {LoginComponent} from './login/login.component';
 
 
 export class AppComponent {
-  title = 'fronted';
+
+
+  currentUser: User;
 
   constructor(private app: AppService, private http: HttpClient, private router: Router) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
   }
+
 
   logout() {
-    this.http.post('paymentSystem/logout', {}).subscribe(resp => {
-      this.router.navigateByUrl('');
-      this.app.authenticated = false;
-    });
+    this.app.logout();
+    this.router.navigate(['/login']);
   }
-
-  authenticated() {
-    return this.app.authenticated;
-  }
-
-  checkAdmin() {
-    if (JSON.parse(localStorage.getItem('user')).roleId === 2) {
+  roleAccess() {
+    if (this.currentUser.roleId === 1) {
       return true;
-    } else {
-      return false;
     }
   }
+
 }

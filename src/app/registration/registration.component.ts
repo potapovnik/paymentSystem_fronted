@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
 
 
   public createUserFunc(user: User) {
+    user.roleId = 2;
     this.userService.registerNewUser(user).subscribe();
   }
 

@@ -14,7 +14,7 @@ import {
   MatDatepickerModule, MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
-  MatListModule, MatNativeDateModule,
+  MatListModule, MatNativeDateModule, MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
 import {BalanceComponent} from './balance/balance.component';
@@ -54,6 +54,7 @@ import {ChangePasswordComponent} from './users/change-password/change-password.c
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatSnackBarModule,
     BrowserAnimationsModule
   ],
   entryComponents: [ ChangePasswordComponent],
