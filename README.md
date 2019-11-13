@@ -1,3 +1,10 @@
+Запуск: (Подготовка:скачать и установить npm,с помощью него установить angular cli(версия указана ниже))
+ 1)скачать проект с github 
+ 2)Открыть через IDE ,например idea 
+ 3)В терминале в корневой папке ввести npm start (В случае отсутствия IDE на компьютере,открыть командную строку перейти в fronted и ввести npm start)
+
+
+
 # Fronted
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
