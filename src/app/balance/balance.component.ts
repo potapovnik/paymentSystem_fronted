@@ -16,7 +16,7 @@ export class BalanceComponent implements OnInit {
   errBalance: String;
 
   constructor(private balanceService: BalanceService, private router: Router, private app: AppService) {
-    this.app.currentUser.subscribe(x => this.currentUser = x);
+
   }
 
   ngOnInit() {
@@ -38,12 +38,16 @@ export class BalanceComponent implements OnInit {
   }
 
   private init() {
-    this.balanceOfUser = new Balance();
-    this.balanceService.getBalanceOfCurrentUser(this.currentUser.id).subscribe(resp => {
-      this.balanceOfUser.numberOfBalance = resp.numberOfBalance;
-      this.balanceOfUser.money = resp.money;
-      this.balanceOfUser.isLock = resp.isLock;
-      this.balanceOfUser.userId = resp.userId;
-    }, err => this.errBalance = err.error.message);
+    this.app.currentUser.subscribe(x => {
+      this.currentUser = x;
+      this.balanceOfUser = new Balance();
+      this.balanceService.getBalanceOfCurrentUser(this.currentUser.id).subscribe(resp => {
+        this.balanceOfUser.numberOfBalance = resp.numberOfBalance;
+        this.balanceOfUser.money = resp.money;
+        this.balanceOfUser.isLock = resp.isLock;
+        this.balanceOfUser.userId = resp.userId;
+      }, err => this.errBalance = err.error.message);
+    });
+
   }
 }

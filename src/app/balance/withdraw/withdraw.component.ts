@@ -7,6 +7,8 @@ import {TransferDto} from '../../entity/transferDto';
 import {Operation} from '../../enum/operation';
 import {Balance} from '../balance';
 import {User} from '../../users/users';
+import {MatSnackBar} from '@angular/material';
+import {AppService} from '../../AppService';
 
 @Component({
   selector: 'app-withdraw',
@@ -27,8 +29,9 @@ export class WithdrawComponent implements OnInit {
   errorTransferOnBalance: String;
   errorTransferOnCard: String;
 
-  constructor(private balanceService: BalanceService, private location: PlatformLocation, private route: ActivatedRoute) {
-    this.currentUser = JSON.parse(localStorage.getItem('user'));
+  constructor(private balanceService: BalanceService, private location: PlatformLocation, private route: ActivatedRoute,
+              private snackBar: MatSnackBar, private app: AppService) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
     this.balanceService.getBalanceOfCurrentUser(this.currentUser.id).subscribe(resp => {
       this.numberCurrentBalance = resp.numberOfBalance;
       this.availableBalance = resp.money;
@@ -49,6 +52,7 @@ export class WithdrawComponent implements OnInit {
     transfer.journal.operationId = Operation.BALANCE_TO_BALANCE;
     transfer.journal.transferText = this.messageWithdrawToBalance;
     this.balanceService.withdrawFromBalanceOnBalance(transfer).subscribe(r => {
+        this.snackBar.open('Перевод оформлен успешно', null, {duration: 1000});
       },
       err => this.errorTransferOnBalance = err.error.message);
   }
@@ -63,6 +67,7 @@ export class WithdrawComponent implements OnInit {
     transfer.journal.operationId = Operation.TRANSFER_TO_CARD;
     transfer.journal.transferText = this.messageWithdrawToCard;
     this.balanceService.withdrawFromBalanceOnCard(transfer).subscribe(r => {
+        this.snackBar.open('Перевод оформлен успешно', null, {duration: 1000});
       },
       err => {this.errorTransferOnCard = err.error.message;
       });

@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AppService} from './AppService';
 import {LoginComponent} from './login/login.component';
 import {User} from './users/users';
+import {Role} from './enum/role';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,7 @@ export class AppComponent {
     this.router.navigate(['/login']);
   }
   roleAccess() {
-    if (this.currentUser.roleId === 1) {
+    if (this.currentUser.roleId === Role.ADMIN) {
       return true;
     }
   }

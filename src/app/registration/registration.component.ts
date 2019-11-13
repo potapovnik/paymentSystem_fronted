@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../users/users';
 import {UserService} from '../users/user.service';
+import {Role} from '../enum/role';
 
 @Component({
   selector: 'app-registration',
@@ -20,7 +21,7 @@ export class RegistrationComponent implements OnInit {
 
 
   public createUserFunc(user: User) {
-    user.roleId = 2;
+    user.roleId = Role.USER;
     this.userService.registerNewUser(user).subscribe();
   }
 

@@ -5,6 +5,7 @@ import {Company} from '../entity/company';
 import {PaymentCompany} from '../entity/paymentCompany';
 import {PaymentUser} from '../entity/paymentUser';
 import {Payment} from '../entity/payment';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'

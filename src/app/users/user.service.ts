@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from './users';
 import {TransferDto} from '../entity/transferDto';
-import {Role} from '../entity/role';
 
 @Injectable({
   providedIn: 'root'
@@ -56,11 +55,6 @@ export class UserService {
     const url = this.transfer + '/journalOfUser' + '?id=' + id;
     console.log(url + '-get journal of user ');
     return this.http.get<TransferDto[]>(url, {headers: this.head});
-  }
-  getCurrentRole(id: number): Observable<Role> {
-    const url = this.users + '/roleOfUser' + '?id=' + id;
-    console.log(url + '-get journal of user ');
-    return this.http.get<Role>(url, {headers: this.head});
   }
 
 }

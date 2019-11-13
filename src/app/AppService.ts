@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Router} from '@angular/router';
 import {UserService} from './users/user.service';
 import {BalanceService} from './balance/balance.service';
 import {User} from './users/users';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AppService {
@@ -12,7 +12,7 @@ export class AppService {
   roleId: number;
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  constructor(private http: HttpClient, private userService: UserService, private balanceService: BalanceService) {
+  constructor(private http: HttpClient, private userService: UserService, private balanceService: BalanceService, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -31,6 +31,7 @@ export class AppService {
           this.roleId = user.roleId;
           this.balanceService.getBalanceOfCurrentUser(user.id).subscribe(balance => {
             localStorage.setItem('balance', JSON.stringify(balance));
+            this.router.navigateByUrl('/balance');
           });
         });
       } else {

@@ -7,6 +7,8 @@ import {Operation} from '../../enum/operation';
 import {BalanceService} from '../balance.service';
 import {isNumeric} from 'tslint';
 import {User} from '../../users/users';
+import {MatSnackBar} from '@angular/material';
+import {AppService} from '../../AppService';
 
 @Component({
   selector: 'app-replenish',
@@ -22,15 +24,16 @@ export class ReplenishComponent implements OnInit {
   currentUser: User;
   errorReplenish: string;
 
-  constructor(private location: PlatformLocation, private balanceService: BalanceService) {
-  }
-
-  ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('user'));
+  constructor(private location: PlatformLocation, private balanceService: BalanceService,
+              private snackBar: MatSnackBar, private app: AppService) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
     this.balanceService.getBalanceOfCurrentUser(this.currentUser.id).subscribe(resp => {
       this.numberCurrentBalance = resp.numberOfBalance;
       this.isLock = resp.isLock;
     });
+  }
+
+  ngOnInit() {
   }
 
   transferFromCard() {
@@ -42,8 +45,10 @@ export class ReplenishComponent implements OnInit {
     transfer.journal.money = this.moneyForTransfer;
     transfer.journal.operationId = Operation.TRANSFER_FROM_CARD;
     transfer.journal.transferText = this.messageForTransfer;
-    this.balanceService.replenishFromCardOnBalance(transfer).subscribe(resp => {},
-    err => this.errorReplenish = err.error.message);
+    this.balanceService.replenishFromCardOnBalance(transfer).subscribe(resp => {
+        this.snackBar.open('Перевод оформлен успешно', null, {duration: 1000});
+      },
+      err => this.errorReplenish = err.error.message);
   }
 
   goBack(): void {

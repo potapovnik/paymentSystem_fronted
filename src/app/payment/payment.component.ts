@@ -10,6 +10,9 @@ import {Payment} from '../entity/payment';
 import {Journal} from '../entity/journal';
 import {Balance} from '../balance/balance';
 import {User} from '../users/users';
+import {HttpClient} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material';
+import {AppService} from '../AppService';
 
 @Component({
   selector: 'app-payment',
@@ -28,9 +31,10 @@ export class PaymentComponent implements OnInit {
   currentUser: User;
   select = false;
 
-  constructor(private paymentService: PaymentService, private balanceService: BalanceService) {
+  constructor(private paymentService: PaymentService, private balanceService: BalanceService,
+              private snackBar: MatSnackBar, private app: AppService) {
     this.currentUser = null;
-    this.currentUser = JSON.parse(localStorage.getItem('user'));
+    this.app.currentUser.subscribe(x => this.currentUser = x);
     this.currentBalance = JSON.parse(localStorage.getItem('balance'));
     this.getAllCompany();
   }
@@ -73,7 +77,9 @@ export class PaymentComponent implements OnInit {
       const payment = new Payment();
       payment.paymentUser = newPaymentUser;
       payment.transfer = newTransfer;
-      this.paymentService.addPaymentFromBalance(payment).subscribe();
+      this.paymentService.addPaymentFromBalance(payment).subscribe(r => {
+        this.snackBar.open('Услуга оплачена успешно', null, {duration: 1000});
+      });
     });
   }
 
@@ -95,7 +101,9 @@ export class PaymentComponent implements OnInit {
       const payment = new Payment();
       payment.paymentUser = newPaymentUser;
       payment.transfer = newTransfer;
-      this.paymentService.addPaymentFromCard(payment).subscribe();
+      this.paymentService.addPaymentFromCard(payment).subscribe(r => {
+        this.snackBar.open('Услуга оплачена успешно', null, {duration: 1000});
+      });
     });
   }
 
@@ -125,7 +133,9 @@ export class PaymentComponent implements OnInit {
         newTransfer.journal.operationId = Operation.PAYMENT_FROM_CARD_AND_BALANCE_TO_BALANCE;
         payment.paymentUser = newPaymentUser;
         payment.transfer = newTransfer;
-        this.paymentService.addPaymentFromCard(payment).subscribe();
+        this.paymentService.addPaymentFromCard(payment).subscribe(r => {
+          this.snackBar.open('Услуга оплачена успешно', null, {duration: 1000});
+        });
       });
     });
   }

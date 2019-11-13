@@ -5,6 +5,7 @@ import {BalanceService} from '../balance/balance.service';
 import {TransferDto} from '../entity/transferDto';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {ChangePasswordComponent} from './change-password/change-password.component';
+import {Role} from '../enum/role';
 
 
 @Pipe({name: 'numberOfCard'})
@@ -52,11 +53,18 @@ export class UsersComponent implements OnInit {
   }
 
   public createUserFunc(user: User) {
-    this.userService.createUser(user).subscribe(resp => this.balanceService.createBalanceOfCurrentUser(user.id).subscribe);
+    user.roleId = Role.USER;
+    this.userService.createUser(user).subscribe(r => {
+        this.userService.getAllUsers().subscribe(allUser => this.allUsers = allUser);
+      }
+    );
   }
 
   public deleteUser(id: number) {
-    this.userService.deleteUser(id).subscribe();
+    this.userService.deleteUser(id).subscribe(r => {
+        this.userService.getAllUsers().subscribe(allUser => this.allUsers = allUser);
+      }
+    );
   }
 
   public updateUser(user: User) {
@@ -73,11 +81,15 @@ export class UsersComponent implements OnInit {
 
   public lockBalance(id: number, isLock: boolean) {
     if (isLock === true) {
-      this.balanceService.lockBalance(id).subscribe();
+      this.balanceService.lockBalance(id).subscribe(r => {
+          this.snackBar.open('Баланс заблокирован', null, {duration: 1000});
+        }
+      );
     } else {
-      this.balanceService.unlockBalance(id).subscribe();
+      this.balanceService.unlockBalance(id).subscribe(r => {
+        this.snackBar.open('Баланс разблокирован', null, {duration: 1000});
+      });
     }
-    this.snackBar.open('Баланс Заблокирован', null, {duration: 1000});
 
   }
 
